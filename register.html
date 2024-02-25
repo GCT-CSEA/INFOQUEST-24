@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/img/iq.jpg" rel="icon">
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js"></script>
     <!-- custom css file link  -->
     <link rel="stylesheet" href="register.css">
     <title>IQ'24 Registration</title>
@@ -14,7 +16,7 @@
 
 <div class="container">
 
-    <form id="form">
+    <form id="myform">
 
         <div class="row">
 
@@ -24,30 +26,35 @@
 
                 <div class="inputBox">
                     <span>Name :</span>
-                    <input type="text" required placeholder="Name" name="name"/>
+                    <input type="text" required placeholder="Name" id="name"/>
                 </div>
                 <div class="inputBox">
                     <span>College :</span>
-                    <input type="text" required placeholder="College Name" name="clg"/>
+                    <input type="text" required placeholder="College Name" id="clg"/>
                 </div>
-                <div class="inputBox">
-                    <span>Email id :</span>
-                    <input type="email" required placeholder="Email" name="email"/>
-                </div>
+               
                 <div class="inputBox">
                     <span>Department :</span>
-                    <input type="text" required placeholder="Department" name="dept"/>
+                    <input type="text" required placeholder="Department" id="dept"/>
+                </div>
+                <div class="inputBox">
+                    <span>Year :</span>
+                    <input type="text" required placeholder="Year" id="year" />
                 </div>
                 <div class="inputBox">
                     <span>Phone no :</span>
-                    <input type="text" required placeholder="Phone No" name="pnum" />
+                    <input type="text" required placeholder="Phone No" id="pnum" />
                 </div>
-
+                <div class="inputBox">
+                    <span>Email id :</span>
+                    <input type="email" required placeholder="Email" id="email"/>
+                </div>
+                
             </div>
 
             <div class="col">
 
-                <h3 class="title">Payment</h3>
+                <h3 class="title">Payment : ₹250/Person</h3>
 
                 <div class="inputBox">
                     <span>Scan the QR code :</span>
@@ -59,18 +66,48 @@
                 </div> -->
                 <div class="inputBox">
                     <span>Transaction id :</span>
-                    <input type="text" required placeholder="Transaction ID" name="tid">
+                    <input type="text" required placeholder="Transaction ID" id="tid">
                 </div>
+
+                <h3 class="title">Events</h3>
+                <div class="row1">
+
+                    <div class="col1 left">           
+                        <input type="checkbox" id="projectron" style="width:18px;height:18px">
+                        <label for="Event1" style="font-size: 18px;"> Projectron</label><br>
+                        <input type="checkbox" id="devduel"  style="width:18px;height:18px">
+                        <label for="Event2" style="font-size: 18px;"> DevDuel</label><br>
+                        <input type="checkbox" id="front2back"  style="width:18px;height:18px">
+                        <label for="Event3" style="font-size: 18px;">Front2Back</label><br>
+                        <input type="checkbox" id="TechTitans"  style="width:18px;height:18px">
+                        <label for="Event4" style="font-size: 18px;">TechTitans</label><br>
+                    </div>
+                    <div class="col1 right">           
+                        <input type="checkbox" id="Picography" style="width:18px;height:18px">
+                        <label for="Event1" style="font-size: 18px;">Picography</label><br>
+                        <input type="checkbox" id="CtrlF"  style="width:18px;height:18px">
+                        <label for="Event2" style="font-size: 18px;">Ctrl+F</label><br>
+                        <input type="checkbox" id="Lexicon"  style="width:18px;height:18px">
+                        <label for="Event3" style="font-size: 18px;">Lexicon</label><br>
+                        <input type="checkbox" id="FlashMemory"  style="width:18px;height:18px">
+                        <label for="Event4" style="font-size: 18px;">FlashMemory</label><br>
+                        </div>
+                    </div>
+                
+
 
             </div>
     
         </div>
 
-       <center> <input type="submit" class="submit-btn" id="submit" ></center>
+       <center> <input type="submit" class="submit-btn"  ></center>
 
     </form>
 
-    <script>
+   
+    
+
+    <!-- <script>
         const form = document.querySelector("#form")
     const submitButton = document.querySelector("#submit")
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzsLe8HGGSJ_V49lPST8O3rC91Rte6ivbISZJI1rpv1LHYTT1VkBlDoS077tbjBbzQ/exec'
@@ -120,8 +157,78 @@
                 submitButton.disabled = false;
             });
     });
-    </script>
+    </script> -->
 </div>
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+    
+    // Paste the code from Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyAEPjgs_mmEx0iRgjWq4CRCkFQPnbgmhjQ",
+        authDomain: "dummyiq-d21b3.firebaseapp.com",
+        projectId: "dummyiq-d21b3",
+        storageBucket: "dummyiq-d21b3.appspot.com",
+        messagingSenderId: "995764597441",
+        appId: "1:995764597441:web:13276e040463c3ed9fda40",
+        measurementId: "G-EJ3EXD36SQ"
+      };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    
+    // Get a reference to the database service
+    const db = getDatabase(app);
+
+    
+
+    
+    
+    document.getElementById('myform').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const projectronValue = document.getElementById('projectron').checked ? 'yes' : 'no';
+        const devduelValue = document.getElementById('devduel').checked ? 'yes' : 'no';
+
+        const front2backValue = document.getElementById('front2back').checked ? 'yes' : 'no';
+
+        const TechTitansValue = document.getElementById('TechTitans').checked ? 'yes' : 'no';
+
+        const PicographyValue = document.getElementById('Picography').checked ? 'yes' : 'no';
+
+        const CtrlFValue = document.getElementById('CtrlF').checked ? 'yes' : 'no';
+
+        const LexiconValue = document.getElementById('Lexicon').checked ? 'yes' : 'no';
+
+        const FlashMemoryValue = document.getElementById('FlashMemory').checked ? 'yes' : 'no';
+
+
+        set(ref(db, 'IQ/' + Math.random().toString(36).slice(2, 7)), {
+            names: document.getElementById('name').value,
+            college: document.getElementById('clg').value,
+            department: document.getElementById('dept').value,
+            years: document.getElementById('year').value,
+            phonenum: document.getElementById('pnum').value,
+            emailid: document.getElementById('email').value,
+            Transactionid: document.getElementById('tid').value,
+            events:{
+                projectron: projectronValue,
+                devduel:devduelValue,
+                front2back:front2backValue,
+                techtitans:TechTitansValue,
+                Picography:PicographyValue,
+                ctrlf:CtrlFValue,
+                lexicon:LexiconValue,
+                flashmemory:FlashMemoryValue
+            } 
+        });
+    
+        alert('Registration Successful! See you in GCT on 8th March');
+        document.getElementById('myform').reset();
+    });
+    </script>
     
 </body>
 </html>

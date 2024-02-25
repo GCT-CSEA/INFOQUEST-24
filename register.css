@@ -47,11 +47,13 @@
 
 .container form .row .col .inputBox {
   margin: 15px 0;
+ 
 }
 
 .container form .row .col .inputBox span {
   margin-bottom: 10px;
   display: block;
+  
 }
 
 .container form .row .col .inputBox input {
@@ -61,6 +63,7 @@
   font-size: 15px;
   text-transform: none;
   transition: border 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 4px;
 }
 
 .container form .row .col .inputBox:hover input {
@@ -99,4 +102,14 @@
 
 .container form .submit-btn:hover {
   background: #db9f25;
+}
+.row1{
+  display: flex;
+}
+.left {
+  width: 50%;
+}
+
+.right {
+  width: 50%;
 }
