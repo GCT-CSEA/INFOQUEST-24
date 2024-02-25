@@ -204,8 +204,10 @@
 
         const FlashMemoryValue = document.getElementById('FlashMemory').checked ? 'yes' : 'no';
 
+        let uniqueId = 'cse'+ Math.random().toString(36).slice(2, 7);
 
-        set(ref(db, 'IQ/' + Math.random().toString(36).slice(2, 7)), {
+
+        set(ref(db, 'IQ/' + uniqueId), {
             names: document.getElementById('name').value,
             college: document.getElementById('clg').value,
             department: document.getElementById('dept').value,
