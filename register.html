@@ -151,6 +151,8 @@
 
         
         let uniqueId = 'cse'+ Math.random().toString(36).slice(2, 7);
+        const d = new Date().getTime();
+        const date = new Date(d);
 
 
         set(ref(db, 'IQ/' + uniqueId), {
@@ -161,6 +163,7 @@
             phonenum: document.getElementById('pnum').value,
             emailid: document.getElementById('email').value,
             Transactionid: document.getElementById('tid').value,
+            registrationDateTime:date.toLocaleString(),
             events:{
                 projectron: projectronValue,
                 devduel:devduelValue,
