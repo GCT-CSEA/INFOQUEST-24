@@ -149,11 +149,9 @@
 
         const FlashMemoryValue = document.getElementById('FlashMemory').checked ? 'yes' : 'no';
 
-        let digit=1001;
 
         
-        let uniqueId = 'cse'+ digit;
-        digit++;
+        let uniqueId = 'cse'+ Math.random().toString(36).slice(2, 7);
         const d = new Date().getTime();
         const date = new Date(d);
 
